@@ -79,3 +79,198 @@ class CoreDataStack {
     }
     
 }
+
+extension CoreDataStack {
+    
+    func resetData() {
+        let entities = persistentContainer.managedObjectModel.entities
+        entities.compactMap ({ $0.name }).forEach(clearEntity)
+        
+        createDummyData()
+        
+        NSLog("Core Data reset")
+        NotificationCenter.default.post(name: NSNotification.Name("Reload"), object: nil)
+    }
+    
+    private func clearEntity(_ name: String) {
+        let deleteRequest = NSFetchRequest<NSFetchRequestResult>(entityName: name)
+        let batchDelete = NSBatchDeleteRequest(fetchRequest: deleteRequest)
+        
+        do {
+            try viewContext.execute(batchDelete)
+        } catch {
+            NSLog("Batch delete error for \(name): \(error)")
+        }
+    }
+    
+    private func createDummyData() {
+        let amazonStore = StoreEntity(context: viewContext)
+        amazonStore.uuid = UUID().uuidString
+        amazonStore.brand = "Amazon"
+        
+        let safariStore = StoreEntity(context: viewContext)
+        safariStore.uuid = UUID().uuidString
+        safariStore.brand = "Safari"
+        
+        let charles = AuthorEntity(context: viewContext)
+        charles.uuid = UUID().uuidString
+        charles.name = "Charles Duhigg"
+        
+        let thePowerOfHabit = BookEntity(context: viewContext)
+        thePowerOfHabit.uuid = UUID().uuidString
+        thePowerOfHabit.title = "The Power of Habit"
+        thePowerOfHabit.price = 13.60
+        thePowerOfHabit.publisher = "Random House"
+        thePowerOfHabit.author = charles
+        
+        let nassim = AuthorEntity(context: viewContext)
+        nassim.uuid = UUID().uuidString
+        nassim.name = "Nassim Nicholas Taleb"
+        
+        let theBlackSwan = BookEntity(context: viewContext)
+        theBlackSwan.uuid = UUID().uuidString
+        theBlackSwan.title = "The Black Swan"
+        theBlackSwan.price = 12.23
+        theBlackSwan.publisher = "Random House"
+        theBlackSwan.author = nassim
+        
+        amazonStore.addToBooks(thePowerOfHabit)
+        amazonStore.addToBooks(theBlackSwan)
+        
+        let chris = AuthorEntity(context: viewContext)
+        chris.uuid = UUID().uuidString
+        chris.name = "Chris Eidhof"
+        
+        let advancedSwift = BookEntity(context: viewContext)
+        advancedSwift.uuid = UUID().uuidString
+        advancedSwift.title = "Advanced Swift"
+        advancedSwift.price = 39.00
+        advancedSwift.publisher = "Createspace Independent Pub"
+        advancedSwift.author = chris
+        
+        let functionalSwift = BookEntity(context: viewContext)
+        functionalSwift.uuid = UUID().uuidString
+        functionalSwift.title = "Functional Swift"
+        functionalSwift.price = 47.00
+        functionalSwift.publisher = "Florian Kugler"
+        functionalSwift.author = chris
+        
+        let florian = AuthorEntity(context: viewContext)
+        florian.uuid = UUID().uuidString
+        florian.name = "Florian Kugler"
+        
+        let coreData = BookEntity(context: viewContext)
+        coreData.uuid = UUID().uuidString
+        coreData.title = "Core Data"
+        coreData.price = 39.00
+        coreData.publisher = "Createspace Independent Pub"
+        coreData.author = florian
+        
+        safariStore.addToBooks(advancedSwift)
+        safariStore.addToBooks(functionalSwift)
+        safariStore.addToBooks(coreData)
+        
+        let userA = UserEntity(context: viewContext)
+        userA.uuid = UUID().uuidString
+        userA.name = "User A"
+        userA.email = "a@user.com"
+        
+        let userB = UserEntity(context: viewContext)
+        userB.uuid = UUID().uuidString
+        userB.name = "User B"
+        userB.email = "b@user.com"
+        
+        let userC = UserEntity(context: viewContext)
+        userC.uuid = UUID().uuidString
+        userC.name = "User C"
+        userC.email = "c@user.com"
+        
+        let userD = UserEntity(context: viewContext)
+        userD.uuid = UUID().uuidString
+        userD.name = "User D"
+        userD.email = "d@user.com"
+        
+        let userE = UserEntity(context: viewContext)
+        userE.uuid = UUID().uuidString
+        userE.name = "User E"
+        userE.email = "e@user.com"
+        
+        let theBlackSwanReviewA = ReviewEntity(context: viewContext)
+        theBlackSwanReviewA.uuid = UUID().uuidString
+        theBlackSwanReviewA.content = "I am not smart enough to estimate the number of people who have been given the capacity to look at the world from an entirely unique and yet vital perspective, but Nassim Taleb is definitely one of them."
+        theBlackSwanReviewA.createdAt = Date()
+        theBlackSwanReviewA.user = userE
+        
+        let theBlackSwanReviewB = ReviewEntity(context: viewContext)
+        theBlackSwanReviewB.uuid = UUID().uuidString
+        theBlackSwanReviewB.content = "I am not sure how to describe it, but reading this book is definitely an Experience."
+        theBlackSwanReviewB.createdAt = Date()
+        theBlackSwanReviewB.user = userD
+        
+        theBlackSwan.addToReviews(theBlackSwanReviewA)
+        theBlackSwan.addToReviews(theBlackSwanReviewB)
+        
+        let thePowerOfHabitReviewA = ReviewEntity(context: viewContext)
+        thePowerOfHabitReviewA.uuid = UUID().uuidString
+        thePowerOfHabitReviewA.content = "Best seller for New York Times, Los Angeles Times, US Today."
+        thePowerOfHabitReviewA.createdAt = Date()
+        thePowerOfHabitReviewA.user = userB
+        
+        let thePowerOfHabitReviewB = ReviewEntity(context: viewContext)
+        thePowerOfHabitReviewB.uuid = UUID().uuidString
+        thePowerOfHabitReviewB.content = "This book helps us understand how habits are formed and how we can use them to our benefit, change them when we need to and replace them when necessary."
+        thePowerOfHabitReviewB.createdAt = Date()
+        thePowerOfHabitReviewB.user = userD
+        
+        thePowerOfHabit.addToReviews(thePowerOfHabitReviewA)
+        thePowerOfHabit.addToReviews(thePowerOfHabitReviewB)
+        
+        let coreDataReviewA = ReviewEntity(context: viewContext)
+        coreDataReviewA.uuid = UUID().uuidString
+        coreDataReviewA.content = "Core Data is cool"
+        coreDataReviewA.createdAt = Date()
+        coreDataReviewA.user = userA
+        
+        let coreDataReviewB = ReviewEntity(context: viewContext)
+        coreDataReviewB.uuid = UUID().uuidString
+        coreDataReviewB.content = "Core Data could do the data persistency work, but it's power is more than that."
+        coreDataReviewB.createdAt = Date()
+        coreDataReviewB.user = userB
+        
+        let coreDataReviewC = ReviewEntity(context: viewContext)
+        coreDataReviewC.uuid = UUID().uuidString
+        coreDataReviewC.content = "I like to use Core Data, but I want my models are value typed."
+        coreDataReviewC.createdAt = Date()
+        coreDataReviewC.user = userA
+        
+        coreData.addToReviews(coreDataReviewA)
+        coreData.addToReviews(coreDataReviewB)
+        coreData.addToReviews(coreDataReviewC)
+        
+        let functionalSwiftReviewA = ReviewEntity(context: viewContext)
+        functionalSwiftReviewA.uuid = UUID().uuidString
+        functionalSwiftReviewA.content = "Swift language supports functional programming."
+        functionalSwiftReviewA.createdAt = Date()
+        functionalSwiftReviewA.user = userA
+        
+        let functionalSwiftReviewB = ReviewEntity(context: viewContext)
+        functionalSwiftReviewB.uuid = UUID().uuidString
+        functionalSwiftReviewB.content = "This is the advanced feature in Swift."
+        functionalSwiftReviewB.createdAt = Date()
+        functionalSwiftReviewB.user = userB
+        
+        functionalSwift.addToReviews(functionalSwiftReviewA)
+        functionalSwift.addToReviews(functionalSwiftReviewB)
+        
+        let advancedSwiftReviewA = ReviewEntity(context: viewContext)
+        advancedSwiftReviewA.uuid = UUID().uuidString
+        advancedSwiftReviewA.content = "Talk about advanced concepts in Swift programming."
+        advancedSwiftReviewA.createdAt = Date()
+        advancedSwiftReviewA.user = userC
+        
+        advancedSwift.addToReviews(advancedSwiftReviewA)
+        
+        saveContext()
+    }
+    
+}
