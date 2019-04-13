@@ -1,4 +1,42 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.98" systemVersion="18E226" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="AuthorEntity" representedClassName="AuthorEntity" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uuid" attributeType="String" syncable="YES"/>
+        <relationship name="books" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="BookEntity" inverseName="author" inverseEntity="BookEntity" syncable="YES"/>
+    </entity>
+    <entity name="BookEntity" representedClassName="BookEntity" syncable="YES">
+        <attribute name="price" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="publisher" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uuid" attributeType="String" syncable="YES"/>
+        <relationship name="author" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AuthorEntity" inverseName="books" inverseEntity="AuthorEntity" syncable="YES"/>
+        <relationship name="reviews" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ReviewEntity" inverseName="book" inverseEntity="ReviewEntity" syncable="YES"/>
+        <relationship name="store" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="StoreEntity" inverseName="books" inverseEntity="StoreEntity" syncable="YES"/>
+    </entity>
+    <entity name="ReviewEntity" representedClassName="ReviewEntity" syncable="YES">
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="uuid" attributeType="String" syncable="YES"/>
+        <relationship name="book" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BookEntity" inverseName="reviews" inverseEntity="BookEntity" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserEntity" inverseName="reviews" inverseEntity="UserEntity" syncable="YES"/>
+    </entity>
+    <entity name="StoreEntity" representedClassName="StoreEntity" syncable="YES">
+        <attribute name="brand" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uuid" attributeType="String" syncable="YES"/>
+        <relationship name="books" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="BookEntity" inverseName="store" inverseEntity="BookEntity" syncable="YES"/>
+    </entity>
+    <entity name="UserEntity" representedClassName="UserEntity" syncable="YES">
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uuid" attributeType="String" syncable="YES"/>
+        <relationship name="reviews" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ReviewEntity" inverseName="user" inverseEntity="ReviewEntity" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="StoreEntity" positionX="-136.28125" positionY="-127.74609375" width="128" height="88"/>
+        <element name="AuthorEntity" positionX="253.8671875" positionY="-216.13671875" width="128" height="88"/>
+        <element name="BookEntity" positionX="64.54296875" positionY="-187.79296875" width="128" height="148"/>
+        <element name="UserEntity" positionX="448.41015625" positionY="-57.88671875" width="128" height="103"/>
+        <element name="ReviewEntity" positionX="261.66015625" positionY="-72.890625" width="128" height="118"/>
+    </elements>
 </model>

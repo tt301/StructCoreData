@@ -26,6 +26,16 @@
 		CA89C4542260D115009E747C /* AuthorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA89C4532260D115009E747C /* AuthorModel.swift */; };
 		CA89C4562260D2A5009E747C /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA89C4552260D2A5009E747C /* UIColor+Extension.swift */; };
 		CA89C4582260D455009E747C /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA89C4572260D455009E747C /* UIView+Extension.swift */; };
+		CAB3CA0E2261627300992C92 /* AuthorEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CA042261627300992C92 /* AuthorEntity+CoreDataClass.swift */; };
+		CAB3CA0F2261627300992C92 /* AuthorEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CA052261627300992C92 /* AuthorEntity+CoreDataProperties.swift */; };
+		CAB3CA102261627300992C92 /* ReviewEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CA062261627300992C92 /* ReviewEntity+CoreDataClass.swift */; };
+		CAB3CA112261627300992C92 /* ReviewEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CA072261627300992C92 /* ReviewEntity+CoreDataProperties.swift */; };
+		CAB3CA122261627300992C92 /* UserEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CA082261627300992C92 /* UserEntity+CoreDataClass.swift */; };
+		CAB3CA132261627300992C92 /* UserEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CA092261627300992C92 /* UserEntity+CoreDataProperties.swift */; };
+		CAB3CA142261627300992C92 /* StoreEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CA0A2261627300992C92 /* StoreEntity+CoreDataClass.swift */; };
+		CAB3CA152261627300992C92 /* StoreEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CA0B2261627300992C92 /* StoreEntity+CoreDataProperties.swift */; };
+		CAB3CA162261627300992C92 /* BookEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CA0C2261627300992C92 /* BookEntity+CoreDataClass.swift */; };
+		CAB3CA172261627300992C92 /* BookEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CA0D2261627300992C92 /* BookEntity+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +60,16 @@
 		CA89C4532260D115009E747C /* AuthorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorModel.swift; sourceTree = "<group>"; };
 		CA89C4552260D2A5009E747C /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		CA89C4572260D455009E747C /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		CAB3CA042261627300992C92 /* AuthorEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthorEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CAB3CA052261627300992C92 /* AuthorEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthorEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CAB3CA062261627300992C92 /* ReviewEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReviewEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CAB3CA072261627300992C92 /* ReviewEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReviewEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CAB3CA082261627300992C92 /* UserEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CAB3CA092261627300992C92 /* UserEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CAB3CA0A2261627300992C92 /* StoreEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoreEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CAB3CA0B2261627300992C92 /* StoreEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoreEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CAB3CA0C2261627300992C92 /* BookEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CAB3CA0D2261627300992C92 /* BookEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +140,16 @@
 		CA89C43A2260CADB009E747C /* Core Data Model */ = {
 			isa = PBXGroup;
 			children = (
+				CAB3CA042261627300992C92 /* AuthorEntity+CoreDataClass.swift */,
+				CAB3CA052261627300992C92 /* AuthorEntity+CoreDataProperties.swift */,
+				CAB3CA062261627300992C92 /* ReviewEntity+CoreDataClass.swift */,
+				CAB3CA072261627300992C92 /* ReviewEntity+CoreDataProperties.swift */,
+				CAB3CA082261627300992C92 /* UserEntity+CoreDataClass.swift */,
+				CAB3CA092261627300992C92 /* UserEntity+CoreDataProperties.swift */,
+				CAB3CA0A2261627300992C92 /* StoreEntity+CoreDataClass.swift */,
+				CAB3CA0B2261627300992C92 /* StoreEntity+CoreDataProperties.swift */,
+				CAB3CA0C2261627300992C92 /* BookEntity+CoreDataClass.swift */,
+				CAB3CA0D2261627300992C92 /* BookEntity+CoreDataProperties.swift */,
 				CA89C42A2260BD69009E747C /* StructCoreData.xcdatamodeld */,
 			);
 			path = "Core Data Model";
@@ -234,20 +264,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA89C4452260CECF009E747C /* StoreViewController.swift in Sources */,
+				CAB3CA132261627300992C92 /* UserEntity+CoreDataProperties.swift in Sources */,
+				CAB3CA0F2261627300992C92 /* AuthorEntity+CoreDataProperties.swift in Sources */,
 				CA89C4502260D060009E747C /* ReviewModel.swift in Sources */,
 				CA89C4582260D455009E747C /* UIView+Extension.swift in Sources */,
 				CA89C44A2260D02F009E747C /* StoreViewModel.swift in Sources */,
 				CA89C4422260CB7B009E747C /* CoreDataStack.swift in Sources */,
+				CAB3CA172261627300992C92 /* BookEntity+CoreDataProperties.swift in Sources */,
+				CAB3CA112261627300992C92 /* ReviewEntity+CoreDataProperties.swift in Sources */,
+				CAB3CA122261627300992C92 /* UserEntity+CoreDataClass.swift in Sources */,
 				CA89C43E2260CB1B009E747C /* EntityProtocol.swift in Sources */,
 				CA89C4522260D06C009E747C /* UserModel.swift in Sources */,
 				CA89C4542260D115009E747C /* AuthorModel.swift in Sources */,
+				CAB3CA152261627300992C92 /* StoreEntity+CoreDataProperties.swift in Sources */,
 				CA89C44E2260D04D009E747C /* BookModel.swift in Sources */,
 				CA89C43C2260CAF8009E747C /* CoreDataService.swift in Sources */,
 				CA89C4562260D2A5009E747C /* UIColor+Extension.swift in Sources */,
+				CAB3CA142261627300992C92 /* StoreEntity+CoreDataClass.swift in Sources */,
 				CA89C4262260BD69009E747C /* ViewController.swift in Sources */,
 				CA89C42C2260BD69009E747C /* StructCoreData.xcdatamodeld in Sources */,
 				CA89C4402260CB62009E747C /* EntityConvertible.swift in Sources */,
 				CA89C4242260BD69009E747C /* AppDelegate.swift in Sources */,
+				CAB3CA102261627300992C92 /* ReviewEntity+CoreDataClass.swift in Sources */,
+				CAB3CA0E2261627300992C92 /* AuthorEntity+CoreDataClass.swift in Sources */,
+				CAB3CA162261627300992C92 /* BookEntity+CoreDataClass.swift in Sources */,
 				CA89C44C2260D03A009E747C /* StoreModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

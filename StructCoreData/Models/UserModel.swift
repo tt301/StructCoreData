@@ -7,3 +7,17 @@
 //
 
 import Foundation
+
+struct UserModel {
+    let uuid: String
+    var name: String?
+    var email: String?
+}
+
+extension UserModel {
+    init(uuid: String) {
+        self.uuid = uuid
+        name = nil
+        email = nil
+    }
+}

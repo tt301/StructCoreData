@@ -7,3 +7,17 @@
 //
 
 import Foundation
+
+struct StoreModel {
+    let uuid: String
+    var brand: String?
+    var books: [BookModel]?
+}
+
+extension StoreModel {
+    init(uuid: String) {
+        self.uuid = uuid
+        brand = nil
+        books = nil
+    }
+}

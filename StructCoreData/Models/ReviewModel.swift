@@ -7,3 +7,19 @@
 //
 
 import Foundation
+
+struct ReviewModel {
+    let uuid: String
+    var content: String?
+    var createdAt: Date?
+    var user: UserModel?
+}
+
+extension ReviewModel {
+    init(uuid: String) {
+        self.uuid = uuid
+        content = nil
+        createdAt = nil
+        user = nil
+    }
+}

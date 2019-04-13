@@ -7,3 +7,15 @@
 //
 
 import Foundation
+
+struct AuthorModel {
+    let uuid: String
+    var name: String?
+}
+
+extension AuthorModel {
+    init(uuid: String) {
+        self.uuid = uuid
+        name = nil
+    }
+}
