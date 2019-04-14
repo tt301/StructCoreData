@@ -16,9 +16,9 @@ protocol EntityProtocol {
 
 extension EntityProtocol where Self: NSManagedObject {
     
-    static func fetch(with id: String, in context: NSManagedObjectContext) -> Self {
+    static func fetch(with uuid: String, in context: NSManagedObjectContext) -> Self {
         let fetchRequest = Self.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "uuid == %@", id)
+        fetchRequest.predicate = NSPredicate(format: "uuid == %@", uuid)
         fetchRequest.sortDescriptors = nil
         fetchRequest.returnsObjectsAsFaults = false
         fetchRequest.fetchLimit = 1
@@ -40,7 +40,7 @@ extension EntityProtocol where Self: NSManagedObject {
         
         // Return the new created one
         let object = Self(context: context)
-        object.setValue(id, forKey: "uuid")
+        object.setValue(uuid, forKey: "uuid")
         return object
     }
     

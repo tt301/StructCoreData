@@ -32,10 +32,10 @@
         <relationship name="reviews" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ReviewEntity" inverseName="user" inverseEntity="ReviewEntity" syncable="YES"/>
     </entity>
     <elements>
-        <element name="AuthorEntity" positionX="253.8671875" positionY="-216.13671875" width="128" height="88"/>
+        <element name="AuthorEntity" positionX="255.76953125" positionY="-157.734375" width="128" height="88"/>
         <element name="BookEntity" positionX="64.54296875" positionY="-187.79296875" width="128" height="135"/>
-        <element name="ReviewEntity" positionX="261.66015625" positionY="-72.890625" width="128" height="120"/>
-        <element name="StoreEntity" positionX="-136.28125" positionY="-127.74609375" width="128" height="88"/>
-        <element name="UserEntity" positionX="448.41015625" positionY="-57.88671875" width="128" height="103"/>
+        <element name="ReviewEntity" positionX="65.9453125" positionY="-35.17578125" width="128" height="120"/>
+        <element name="StoreEntity" positionX="-121.6796875" positionY="-142.765625" width="128" height="88"/>
+        <element name="UserEntity" positionX="255.4921875" positionY="-20.15625" width="128" height="103"/>
     </elements>
 </model>
