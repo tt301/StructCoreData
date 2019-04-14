@@ -106,11 +106,11 @@ extension CoreDataStack {
     private func createDummyData() {
         let amazonStore = StoreEntity(context: viewContext)
         amazonStore.uuid = UUID().uuidString
-        amazonStore.brand = "Amazon"
+        amazonStore.brand = "Amazon Books"
         
         let safariStore = StoreEntity(context: viewContext)
         safariStore.uuid = UUID().uuidString
-        safariStore.brand = "Safari"
+        safariStore.brand = "Safari Books Online"
         
         let charles = AuthorEntity(context: viewContext)
         charles.uuid = UUID().uuidString

@@ -20,7 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         
-        window?.rootViewController = UINavigationController(rootViewController: StoreViewController())
+        let dataModel = StoresDataModel()
+        let storesViewController = StoresViewController(dataModel: dataModel)
+        window?.rootViewController = UINavigationController(rootViewController: storesViewController)
         
         // Clear data
         DispatchQueue.global().async {
