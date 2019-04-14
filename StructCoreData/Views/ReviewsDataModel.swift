@@ -22,8 +22,9 @@ struct ReviewsDataModel: ReviewsDataModelProtocol {
     
     func fetchReviews(completion: @escaping ([ReviewModel]) -> Void) {
         let predicate = NSPredicate(format: "bookId == %@", book.uuid)
+        let sort = NSSortDescriptor(key: "createdAt", ascending: true)
         
-        coreData.fetch(with: predicate) { (result: Result<[ReviewModel]>) in
+        coreData.fetch(with: predicate, sortDescriptors: [sort]) { (result: Result<[ReviewModel]>) in
             switch result {
             case .success(let items):
                 completion(items)

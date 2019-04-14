@@ -21,8 +21,9 @@ struct BooksDataModel: BooksDataModelProtocol {
     
     func fetchBooks(completion: @escaping ([BookModel]) -> Void) {
         let predicate = NSPredicate(format: "store.uuid == %@", store.uuid)
+        let sort = NSSortDescriptor(key: "title", ascending: true)
         
-        coreData.fetch(with: predicate) { (result: Result<[BookModel]>) in
+        coreData.fetch(with: predicate, sortDescriptors: [sort]) { (result: Result<[BookModel]>) in
             switch result {
             case .success(let items):
                 completion(items)
