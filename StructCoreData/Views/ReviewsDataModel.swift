@@ -11,6 +11,7 @@ import Foundation
 protocol ReviewsDataModelProtocol {
     var book: BookModel { get }
     func fetchReviews(completion: @escaping ([ReviewModel]) -> Void)
+    func deleteReview(_ review: ReviewModel, completion: @escaping (Bool) -> Void)
 }
 
 struct ReviewsDataModel: ReviewsDataModelProtocol {
@@ -20,7 +21,7 @@ struct ReviewsDataModel: ReviewsDataModelProtocol {
     let coreData = CoreDataService.shared
     
     func fetchReviews(completion: @escaping ([ReviewModel]) -> Void) {
-        let predicate = NSPredicate(format: "book.uuid == %@", book.uuid)
+        let predicate = NSPredicate(format: "bookId == %@", book.uuid)
         
         coreData.fetch(with: predicate) { (result: Result<[ReviewModel]>) in
             switch result {
@@ -29,6 +30,17 @@ struct ReviewsDataModel: ReviewsDataModelProtocol {
             case .failure(let error):
                 completion([])
                 NSLog(error.localizedDescription)
+            }
+        }
+    }
+    
+    func deleteReview(_ review: ReviewModel, completion: @escaping (Bool) -> Void) {
+        coreData.delete(entities: [review]) { error in
+            if error == nil {
+                completion(true)
+            } else {
+                completion(false)
+                NSLog(error!.localizedDescription)
             }
         }
     }

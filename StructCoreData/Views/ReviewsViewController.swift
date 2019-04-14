@@ -28,8 +28,14 @@ class ReviewsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupViews()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(handleAdd))
         
+        setupViews()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
         loadData()
     }
     
@@ -73,8 +79,8 @@ class ReviewsViewController: UIViewController {
     
     lazy var reviewTable: UITableView = {
         let tableView = UITableView()
+        tableView.separatorStyle = .none
         tableView.dataSource = self
-        tableView.delegate = self
         tableView.registerCell(ReviewTableViewCell.self)
         return tableView
     }()
@@ -120,6 +126,14 @@ class ReviewsViewController: UIViewController {
         }
     }
     
+    @objc func handleAdd() {
+        let newReviewDataModel = NewReviewDataModel(book: dataModel.book)
+        let newReviewViewController = NewReviewViewController(dataModel: newReviewDataModel)
+        
+        let noteEditingNavigation = UINavigationController(rootViewController: newReviewViewController)
+        navigationController?.present(noteEditingNavigation, animated: true)
+    }
+    
 }
 
 extension ReviewsViewController: UITableViewDataSource {
@@ -133,20 +147,31 @@ extension ReviewsViewController: UITableViewDataSource {
         let review = reviews[indexPath.row]
         
         cell.content.text = review.content
-        cell.username.text = review.user?.name
+        cell.name.text = review.user?.name
         cell.email.text = review.user?.email
         
         if indexPath.row % 2 == 0 {
-            cell.backgroundColor = UIColor(white: 0.9, alpha: 1)
+            cell.backgroundColor = UIColor.fromHEX("#EAEAEA")
         } else {
-            cell.backgroundColor = UIColor(white: 0.9, alpha: 0.3)
+            cell.backgroundColor = UIColor.fromHEX("#FAFAFA")
         }
         return cell
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let review = reviews.remove(at: indexPath.row)
+            self.reviewTable.deleteRows(at: [indexPath], with: .fade)
+            
+            dataModel.deleteReview(review) { success in
+                DispatchQueue.main.async {
+                    self.reviewTable.reloadData()
+                }
+            }
+        }
+    }
+    
 }
-
-extension ReviewsViewController: UITableViewDelegate {}
 
 class ReviewTableViewCell: UITableViewCell {
     
@@ -173,7 +198,7 @@ class ReviewTableViewCell: UITableViewCell {
         return label
     }()
     
-    let username: UILabel = {
+    let name: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = UIColor.darkGray
@@ -192,14 +217,14 @@ class ReviewTableViewCell: UITableViewCell {
         addConstraints(format: "H:|-15-[v0]-15-|", views: content)
         addConstraints(format: "V:|-10-[v0]", views: content)
         
-        addSubview(username)
-        addConstraints(format: "H:|-15-[v0]", views: username)
-        addConstraints(format: "V:[v0]-5-|", views: username)
-        username.topAnchor.constraint(equalTo: content.bottomAnchor, constant: 10).isActive = true
+        addSubview(name)
+        addConstraints(format: "H:|-15-[v0]", views: name)
+        addConstraints(format: "V:[v0]-5-|", views: name)
+        name.topAnchor.constraint(equalTo: content.bottomAnchor, constant: 10).isActive = true
         
         addSubview(email)
         addConstraints(format: "H:[v0]-15-|", views: email)
-        email.centerYAnchor.constraint(equalTo: username.centerYAnchor).isActive = true
+        email.centerYAnchor.constraint(equalTo: name.centerYAnchor).isActive = true
     }
     
 }

@@ -20,25 +20,7 @@ extension BookEntity {
     @NSManaged public var price: Double
     @NSManaged public var publisher: String?
     @NSManaged public var title: String?
-    @NSManaged public var reviews: Set<ReviewEntity>?
     @NSManaged public var store: StoreEntity?
     @NSManaged public var author: AuthorEntity?
-
-}
-
-// MARK: Generated accessors for reviews
-extension BookEntity {
-
-    @objc(addReviewsObject:)
-    @NSManaged public func addToReviews(_ value: ReviewEntity)
-
-    @objc(removeReviewsObject:)
-    @NSManaged public func removeFromReviews(_ value: ReviewEntity)
-
-    @objc(addReviews:)
-    @NSManaged public func addToReviews(_ values: NSSet)
-
-    @objc(removeReviews:)
-    @NSManaged public func removeFromReviews(_ values: NSSet)
 
 }

@@ -20,9 +20,13 @@ struct NewReviewDataModel: NewReviewDataModelProtocol {
     let coreData = CoreDataService.shared
     
     func createReview(_ review: ReviewModel, completion: @escaping (Bool) -> Void) {
-//        review.book = book
         coreData.update(entities: [review]) { error in
-            
+            if error == nil {
+                completion(true)
+            } else {
+                completion(false)
+                NSLog(error!.localizedDescription)
+            }
         }
     }
     

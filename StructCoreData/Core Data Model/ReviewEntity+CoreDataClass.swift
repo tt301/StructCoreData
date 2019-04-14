@@ -19,6 +19,7 @@ extension ReviewEntity: EntityProtocol {
     
     func toModel() -> ReviewModel {
         var review = ReviewModel(uuid: uuid)
+        review.bookId = bookId
         review.content = content
         review.createdAt = createdAt
         review.user = user?.toModel()
@@ -31,6 +32,7 @@ extension ReviewModel: EntityConvertible {
     
     func toEntity(context: NSManagedObjectContext) -> ReviewEntity {
         let review = ReviewEntity.fetch(with: uuid, in: context)
+        review.bookId = bookId
         review.content = content
         review.createdAt = createdAt
         review.user = user?.toEntity(context: context)

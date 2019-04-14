@@ -13,9 +13,11 @@ class NewReviewViewController: UIViewController {
     // MARK: - Property
     
     let dataModel: NewReviewDataModelProtocol
+    let book: BookModel
     
     init(dataModel: NewReviewDataModelProtocol) {
         self.dataModel = dataModel
+        self.book = dataModel.book
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -25,6 +27,9 @@ class NewReviewViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleCancel))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(handleDone))
         
         setupViews()
     }
@@ -102,7 +107,7 @@ class NewReviewViewController: UIViewController {
         }
         
         let user = UserModel(uuid: UUID().uuidString, name: name, email: email)
-        let review = ReviewModel(uuid: UUID().uuidString, content: content, createdAt: Date(), user: user)
+        let review = ReviewModel(uuid: UUID().uuidString, bookId: book.uuid, content: content, createdAt: Date(), user: user)
         
         dataModel.createReview(review) { success in
             DispatchQueue.main.async {

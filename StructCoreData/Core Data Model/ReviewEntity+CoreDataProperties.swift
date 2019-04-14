@@ -17,6 +17,7 @@ extension ReviewEntity {
     }
 
     @NSManaged public var uuid: String
+    @NSManaged public var bookId: String?
     @NSManaged public var content: String?
     @NSManaged public var createdAt: Date?
     @NSManaged public var book: BookEntity?

@@ -31,7 +31,6 @@ class BooksViewController: UIViewController {
         navigationItem.title = dataModel.store.brand
         
         setupViews()
-        
         loadData()
     }
     

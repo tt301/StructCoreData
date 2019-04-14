@@ -23,7 +23,6 @@ extension BookEntity: EntityProtocol {
         book.price = price
         book.publisher = publisher
         book.author = author?.toModel()
-        book.reviews = reviews?.compactMap { $0.toModel() }
         return book
     }
     
@@ -37,7 +36,6 @@ extension BookModel: EntityConvertible {
         book.price = price ?? 0.0
         book.publisher = publisher
         book.author = author?.toEntity(context: context)
-        book.reviews = Set(reviews?.compactMap { $0.toEntity(context: context) } ?? [])
         return book
     }
     

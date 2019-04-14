@@ -14,7 +14,6 @@ struct BookModel {
     var price: Double?
     var publisher: String?
     var author: AuthorModel?
-    var reviews: [ReviewModel]?
 }
 
 extension BookModel {
@@ -24,6 +23,5 @@ extension BookModel {
         price = nil
         publisher = nil
         author = nil
-        reviews = nil
     }
 }

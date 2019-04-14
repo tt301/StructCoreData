@@ -10,6 +10,7 @@ import Foundation
 
 struct ReviewModel {
     let uuid: String
+    var bookId: String?
     var content: String?
     var createdAt: Date?
     var user: UserModel?
@@ -18,6 +19,7 @@ struct ReviewModel {
 extension ReviewModel {
     init(uuid: String) {
         self.uuid = uuid
+        bookId = nil
         content = nil
         createdAt = nil
         user = nil
