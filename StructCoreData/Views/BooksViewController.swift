@@ -40,8 +40,7 @@ class BooksViewController: UIViewController {
         let tableView = UITableView()
         tableView.dataSource = self
         tableView.delegate = self
-//        tableView.registerCell(UITableViewCell.self)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.registerCell(BookTableViewCell.self)
         return tableView
     }()
     
@@ -73,11 +72,10 @@ extension BooksViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(forIndexPath: indexPath) as BookTableViewCell
         let book = books[indexPath.row]
         cell.textLabel?.text = book.title
         cell.detailTextLabel?.text = book.author?.name
-        cell.selectionStyle = .none
         return cell
     }
     
@@ -90,6 +88,19 @@ extension BooksViewController: UITableViewDelegate {
         let dataModel = ReviewsDataModel(book: book)
         let reviewsViewController = ReviewsViewController(dataModel: dataModel)
         navigationController?.pushViewController(reviewsViewController, animated: true)
+    }
+    
+}
+
+class BookTableViewCell: UITableViewCell {
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+        self.selectionStyle = .none
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
 }
