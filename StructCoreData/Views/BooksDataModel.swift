@@ -20,6 +20,16 @@ struct BooksDataModel: BooksDataModelProtocol {
     let coreData = CoreDataService.shared
     
     func fetchBooks(completion: @escaping ([BookModel]) -> Void) {
+        DispatchQueue.global().async {
+            if let books = self.store.books {
+                let sortedBooks = books.sorted { $0.title! < $1.title! }
+                completion(sortedBooks)
+            } else {
+                completion([])
+            }
+        }
+        
+        /*
         let predicate = NSPredicate(format: "store.uuid == %@", store.uuid)
         let sort = NSSortDescriptor(key: "title", ascending: true)
         
@@ -32,6 +42,7 @@ struct BooksDataModel: BooksDataModelProtocol {
                 NSLog(error.localizedDescription)
             }
         }
+        */
     }
 
 }
