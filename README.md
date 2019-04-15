@@ -8,7 +8,7 @@ In my daily app development, I like to use Swift struct to build my model. It's 
 
 First, let's see the app we are building. It is a book store app, which has Amazon and Safari two brands. Each store has some books, and the book contains some reviews, you can add or remove a review. All data is persisted in Core Data, for each view, the business data flow is handled by struct model.
 
-[Here comes a gif](https://)
+![Here comes a gif](StructCoreData.gif)
 
 The key point of the solution is a mechanism for converting struct model to Core Data entity back and forth. So we introduce two protocols:
 
