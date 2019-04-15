@@ -4,13 +4,13 @@ This is a demo project to illustrate how to use value typed model in your app da
 
 ## Blog
 
-In my daily app development, I like to use Swift struct to build my model, it's value typed, no state issues. This is cool for the most case, but if you want to use Core Data as the persistence layer, you got a problem. How to transfer your struct to Core Data entity, and the reverse way? In this blog, I will try to give a solution.
+In my daily app development, I like to use Swift struct to build my model. It's value typed, no states issues. This is cool for the most case. But if you want to use Core Data as the persistence layer, you need to think more, how to transfer your struct to Core Data entity, and in the reverse way? In this blog, I will try to give a solution.
 
-First, let's see the app we are building. It is a book store app, which has Amazon and Safari two brands. Each store has some books, and the book contains some reviews, you can add or remove a review. All data has been saved in Core Data, for each view, the data is fed by struct model.
+First, let's see the app we are building. It is a book store app, which has Amazon and Safari two brands. Each store has some books, and the book contains some reviews, you can add or remove a review. All data is persisted in Core Data, for each view, the business data flow is handled by struct model.
 
 [Here comes a gif](https://)
 
-The key point for the solution is you need to provide a mechanism to convert struct model to Core Data entity back and forth. So we introduce two protocols:
+The key point of the solution is a mechanism for converting struct model to Core Data entity back and forth. So we introduce two protocols:
 
 ```swift
 protocol EntityProtocol {
@@ -185,6 +185,16 @@ func fetchReviews(completion: @escaping ([ReviewModel]) -> Void) {
 }
 ```
 
-The last section is how to send struct model to do the CRUD operation in Core Data.
+Now we need to handle how to send struct model to do CRUD operations in Core Data. To achieve this, we introduce `CoreDataServiceProtocol`. Create and update will be handled by `update` func, read will be handled by `fetch` func, and delete will be handled by `delete` func.
 
-To be continued ...
+```swift
+protocol CoreDataServiceProtocol {
+    func fetch<Model: EntityConvertible>(with predicate: NSPredicate?, sortDescriptors: [NSSortDescriptor]?, fetchLimit: Int?, completion: @escaping (Result<[Model]>) -> Void)
+    func update<Model: EntityConvertible>(entities: [Model], completion: @escaping (Error?) -> Void)
+    func delete<Model: EntityConvertible>(entities: [Model], completion: @escaping (Error?) -> Void)
+}
+```
+
+The last thing I want to mention is we need to handle state changes manully now, because every view's data is value typed struct. This really needs some extra work, but I am happy to accept it.
+
+Yeah, that's it. Enjoy with the demo project.
