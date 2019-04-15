@@ -103,6 +103,88 @@ extension EntityProtocol where Self: NSManagedObject {
 }
 ```
 
-The next scenario we need to hanle is One-Many relationship.
+The next scenario we need to handle is *One-Many* relationship. There are two ways to implement it, the first way is let the *One* hold the ownership, it contains an array of *Many*. The second way is let each of *Many* hold a back reference to the *One*. Which way should be adopted is really depends on your business workflow. 
+
+Let's see the *One* holds the ownership first, using `StoreModel` for example:
+
+```swift
+struct StoreModel {
+    let uuid: String
+    var brand: String?
+    var books: [BookModel]?
+}
+
+extension StoreEntity: EntityProtocol {
+    
+    func toModel() -> StoreModel {
+        var store = StoreModel(uuid: uuid)
+        store.brand = brand
+        store.books = books?.compactMap { $0.toModel() }
+        return store
+    }
+    
+}
+
+extension StoreModel: EntityConvertible {
+    
+    func toEntity(context: NSManagedObjectContext) -> StoreEntity {
+        let store = StoreEntity.fetch(with: uuid, in: context)
+        store.brand = brand
+        store.books = Set(books?.compactMap { $0.toEntity(context: context) } ?? [])
+        return store
+    }
+    
+}
+```
+
+For both directions, we use `Array` or `Set` to hold *Many* relationship. From `StoresViewController` to `BooksViewController`, the `store` property will be passed, which contains the books to display. In app business data flow, we always using struct model to define api. Such as `BooksDataModelProtocol`:
+
+```swift
+protocol BooksDataModelProtocol {
+    var store: StoreModel { get }
+    func fetchBooks(completion: @escaping ([BookModel]) -> Void)
+}
+```
+
+Now, let's take a look at another approach - back reference. We use `BookModel` and `ReviewModel` for example. Each book could has some reviews, but I don't want the book holds all reviews by itself, instead, I think each review holds a book reference is much better, so the `bookId` property has been added in `ReviewModel`.
+
+```swift
+struct BookModel {
+    let uuid: String
+    var title: String?
+    var price: Double?
+    var publisher: String?
+    var author: AuthorModel?
+}
+
+struct ReviewModel {
+    let uuid: String
+    var bookId: String?
+    var content: String?
+    var createdAt: Date?
+    var user: UserModel?
+}
+```
+
+When comes to `ReviewsViewController`, all reviews will be fetched through `bookId` filter.
+
+```swift
+func fetchReviews(completion: @escaping ([ReviewModel]) -> Void) {
+    let predicate = NSPredicate(format: "bookId == %@", book.uuid)
+    let sort = NSSortDescriptor(key: "createdAt", ascending: true)
+    
+    coreData.fetch(with: predicate, sortDescriptors: [sort]) { (result: Result<[ReviewModel]>) in
+        switch result {
+        case .success(let items):
+            completion(items)
+        case .failure(let error):
+            completion([])
+            NSLog(error.localizedDescription)
+        }
+    }
+}
+```
+
+The last section is how to send struct model to do the CRUD operation in Core Data.
 
 To be continued ...
