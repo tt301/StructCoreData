@@ -10,6 +10,10 @@ First, let's see the app we are building. It is a book store app, which has Amaz
 
 ![](Demo.gif)
 
+The model defined in Core Data as below:
+
+![](Model.jpg)
+
 The key point of the solution is a mechanism for converting struct model to Core Data entity back and forth. So we introduce two protocols:
 
 ```swift
